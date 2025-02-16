@@ -3,8 +3,7 @@ import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { Response } from 'express';
-import { Users } from './entities/user.entity';
-
+import { ParseIntPipe } from '@nestjs/common';
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
@@ -24,15 +23,13 @@ export class UsersController {
   }
 
   @Patch(':id')
-  async update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
+  async update(@Param('id') id: number, @Body() updateUserDto: UpdateUserDto) {
     const userupdated = await this.usersService.updateUser(updateUserDto);
     return userupdated
   }
 
-  @Delete('remove')
-  async remove(@Param('id') id: string,  @Body() Users:Users) {
-    const userremoved = await this.usersService.removeUser(id);
-    return userremoved
-  }
-
+  @Delete(':id')
+async remove(@Param('id', ParseIntPipe) id: number) {
+  return await this.usersService.removeUser(id);
+}
 }

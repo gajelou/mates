@@ -4,7 +4,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Users } from './entities/user.entity';
 import {Repository} from 'typeorm';
-import { UUID } from 'crypto';
+import { NotFoundException } from '@nestjs/common';
 
 
 @Injectable()
@@ -16,13 +16,13 @@ export class UsersService {
 
 
   async createUser(userDto: CreateUserDto): Promise<CreateUserDto> {
-    const createdUser = await this.userRepository.save(userDto)
+    const createdUser = await this.userRepository.save(userDto);
     return createdUser;
   }
 
   async findAllUsers(): Promise<Users[]> {
     const findAllUsers = await this.userRepository.find()
-    return findAllUsers
+    return findAllUsers;
   }
 
   async updateUser(userDto: UpdateUserDto): Promise<UpdateUserDto> {
@@ -30,13 +30,15 @@ export class UsersService {
     return updatedUser;
   }
  
-  async removeUser(id:string): Promise<Users[]> {
-    const existingUser =  await this.userRepository.delete(id);
-    console.log(existingUser)
-    return
+  async removeUser(id: number): Promise<{ message: string }> {
+    const user = await this.userRepository.findOne({ where: { id:id } });
 
-}
+    if (!user) {
+      throw new NotFoundException(`Usuário com ID ${id} não encontrado.`);
+    }
 
+    await this.userRepository.delete(id);
+    return { message: `Usuário ${id} removido com sucesso.` };}
 
 
 }

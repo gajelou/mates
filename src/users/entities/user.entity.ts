@@ -1,10 +1,12 @@
-import {Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm'
+import { Housing } from 'src/housing/entities/housing.entity';
+import {Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn, ManyToOne} from 'typeorm'
+
 
 @Entity({name : 'users'})
 export class Users {
     
     @PrimaryGeneratedColumn('uuid')
-    id: string;
+    id: number;
 
     @Column({name: 'name', nullable:false, default: `x`})
     name: string;
@@ -20,4 +22,7 @@ export class Users {
 
     @UpdateDateColumn({name: 'updated_at'})
     updateAt: string;
+
+    @ManyToOne(() => Housing, (housing) => housing.residents, { onDelete: "SET NULL" })
+    housing: Housing;
 }

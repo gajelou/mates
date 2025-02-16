@@ -8,6 +8,7 @@ import { ConfigModule } from '@nestjs/config';
 //import { UserModule } from './user/user.module';
 import { dirname } from 'path';
 import { UsersModule } from './users/users.module';
+import { HousingModule } from './housing/housing.module';
 
 @Module({
   imports: [
@@ -23,7 +24,7 @@ import { UsersModule } from './users/users.module';
       logging: false,
       //migrations:[__dirname + 'database/migrations/*{.js,.ts}'],
       entities:[__dirname + '/**/*.entity{.js,.ts}'],
-    }), UsersModule
+    }), UsersModule, HousingModule
   ],
   controllers: [AppController],
   providers: [AppService],
