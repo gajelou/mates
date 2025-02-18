@@ -1,5 +1,7 @@
-import { Housing } from "src/housing/entities/housing.entity";
-import {Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn, ManyToOne} from "typeorm"
+
+import { Housing } from '../../housing/entities/housing.entity';
+
+import {Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn, ManyToOne} from 'typeorm'
 
 
 @Entity({name : 'users'})
