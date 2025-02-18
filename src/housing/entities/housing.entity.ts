@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
 import { Users } from "src/users/entities/user.entity";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+
 
 @Entity()
 export class Housing {
@@ -15,7 +16,7 @@ export class Housing {
   @Column()
   maxResidents: number;
 
-  @OneToMany(() => Users, (user) => user.housing)
+  @OneToMany(() => Users , (user) => user.housing)
   residents: Users[];
 }
 

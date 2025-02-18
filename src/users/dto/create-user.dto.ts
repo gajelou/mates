@@ -18,9 +18,9 @@ export class CreateUserDto {
     readonly password: string;
 
     @IsString()
-    readonly createdAt: string;
+    readonly createdAt?: string;
 
     @IsString()
-    readonly updatedAt: string;
+    readonly updatedAt?: string;
 
 }
