@@ -36,11 +36,11 @@ export class HousingService {
     const user = await this.housingRepository.findOne({ where: { id:id } });
 
     if (!user) {
-      throw new NotFoundException(`Moradia com ID ${id} não encontrado.`);
+      throw new NotFoundException(`Housing com ID ${id} não encontrado.`);
     }
 
     await this.housingRepository.delete(id);
-    return { message: `Moradia ${id} removida com sucesso.` };}
+    return { message: `Housing ${id} removida com sucesso.` };}
 
 
 }
