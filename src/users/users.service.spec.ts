@@ -19,6 +19,7 @@ describe('UsersService', () => {
   };
 
   beforeEach(async () => {
+    jest.clearAllMocks();
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         UsersService,
@@ -33,24 +34,24 @@ describe('UsersService', () => {
     userRepository = module.get<Repository<Users>>(getRepositoryToken(Users));
   });
 
-  it('deve estar definido', () => {
+  it('should be defined', () => {
     expect(service).toBeDefined();
     expect(userRepository).toBeDefined();
   });
 
-  it('deve criar um usuário', async () => {
+  it('should create an user', async () => {
     const result = await service.createUser(mockUser);
     expect(result).toEqual(mockUser);
     expect(userRepository.save).toHaveBeenCalledWith(mockUser);
   });
 
-  it('deve listar todos os usuários', async () => {
+  it('should list all users', async () => {
     const result = await service.findAllUsers();
     expect(result).toEqual([mockUser]);
     expect(userRepository.find).toHaveBeenCalled();
   });
 
-  it('deve atualizar um usuário', async () => {
+  it('should update a user', async () => {
     const updatedUser = { ...mockUser, name: 'Carlos' };
     userRepository.save = jest.fn().mockResolvedValue(updatedUser);
 
@@ -59,13 +60,13 @@ describe('UsersService', () => {
     expect(userRepository.save).toHaveBeenCalledWith(updatedUser);
   });
 
-  it('deve remover um usuário existente', async () => {
+  it('should remove an existing user', async () => {
     const result = await service.removeUser(1);
     expect(result).toEqual({ message: 'Usuário 1 removido com sucesso.' });
     expect(userRepository.delete).toHaveBeenCalledWith(1);
   });
 
-  it('deve lançar NotFoundException ao remover um usuário inexistente', async () => {
+  it('should throw NotFoundException when removing a non-existent user', async () => {
     userRepository.findOne = jest.fn().mockResolvedValue(null);
     
     await expect(service.removeUser(99)).rejects.toThrow(NotFoundException);
