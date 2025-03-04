@@ -19,5 +19,6 @@ export class Housing {
 
   @OneToMany(() => Users , (user) => user.housing)
   residents: Users[];
+    bills: any;
 }
 

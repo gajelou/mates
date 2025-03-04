@@ -27,4 +27,5 @@ export class Users {
 
     @ManyToOne(() => Housing, (housing) => housing.residents, { onDelete: "SET NULL" })
     housing: Housing;
+    bills: any;
 }
