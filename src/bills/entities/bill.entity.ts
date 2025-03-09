@@ -8,13 +8,13 @@ export class Bills {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
-  description: string;
+  @Column({name: 'name', nullable:false, default: `x`})
+  name: string;
 
-  @Column('decimal')
+  @Column({name:'amount', nullable:false, default: 0})
   amount: number;
 
-  @Column()
+  @Column({name: 'dueDate'})
   dueDate: string;
 
   @ManyToOne(() => Housing, (housing) => housing.bills)
