@@ -13,7 +13,7 @@ export class BillsController {
     const bill = await this.billsService.create(createBillDto);
     return res.status(201).json(bill);
   }
-
+  
   @Get('all')
   async findAll(@Res() res: Response) {
     const bills = await this.billsService.findAll();

@@ -28,4 +28,6 @@ export class Users {
     @ManyToOne(() => Housing, (housing) => housing.residents, { onDelete: "SET NULL" })
     housing: Housing;
     bills: any;
+    @ManyToOne(() => Users, (user) => user.bills, { eager: true, nullable: false })
+    user: Users;
 }
