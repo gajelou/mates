@@ -9,6 +9,7 @@ import { NotFoundException } from '@nestjs/common';
 
 @Injectable()
 export class UsersService {
+  
   constructor(
     @InjectRepository(Users)
     private readonly userRepository: Repository<Users>
@@ -20,17 +21,27 @@ export class UsersService {
     return createdUser;
   }
 
+  async findOne(username: string): Promise<Users | undefined> {
+    return this.userRepository.findOne({ where: { username } });
+  }
+ 
+
   async findAllUsers(): Promise<Users[]> {
     const findAllUsers = await this.userRepository.find()
     return findAllUsers;
   }
 
+
+  async findByEmail(email: string): Promise<Users | undefined> {
+  return await this.userRepository.findOne({ where: { email } });
+  }
+  
   async updateUser(userDto: UpdateUserDto): Promise<UpdateUserDto> {
     const updatedUser = await this.userRepository.save(userDto)
     return updatedUser;
   }
  
-  async removeUser(id: number): Promise<{ message: string }> {
+  async removeUser(id: number) : Promise<{ message: string }> {
     const user = await this.userRepository.findOne({ where: { id:id } });
 
     if (!user) {

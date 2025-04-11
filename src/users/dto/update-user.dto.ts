@@ -7,7 +7,7 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {
 
     @IsString()
     @IsNotEmpty()
-    readonly name?: string;
+    readonly username?: string;
 
     @IsString()
     @IsNotEmpty()

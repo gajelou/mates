@@ -9,7 +9,7 @@ describe('UsersService', () => {
   let service: UsersService;
   let userRepository: Repository<Users>;
 
-  const mockUser = { id: 1, name: 'João', email: 'joao@email.com', password: '123456' };
+  const mockUser = { id: 1, username: 'João', email: 'joao@email.com', password: '123456' };
 
   const mockUserRepository = {
     save: jest.fn().mockResolvedValue(mockUser),

@@ -1,6 +1,7 @@
 
 import { Housing } from '../../housing/entities/housing.entity';
 
+
 import {Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn, ManyToOne} from 'typeorm'
 
 
@@ -10,8 +11,8 @@ export class Users {
     @PrimaryGeneratedColumn('uuid')
     id: number;
 
-    @Column({name: 'name', nullable:false, default: `x`})
-    name: string;
+    @Column({name: 'username', nullable:false, default: `x`})
+    username: string;
 
     @Column({name:'email', nullable:false, unique:true})
     email: string;
